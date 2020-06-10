@@ -1,4 +1,3 @@
-'use strict';
 var inputNum = $('#inputNum').val();
 
 function getDogImage() {
@@ -12,15 +11,17 @@ function getDogImage() {
 
 function displayResults(responseJson) {
   console.log(responseJson);
+  console.log(responseJson.message);
+  let htmlString = [];
   //replace the existing image with the new one
-  imagesArray = responseJson.message;
-  console.log(imagesArray);
-  for (let i=0; i<inputNum.length; i++) {
-    let generateForm = function(){return`<img src="${imagesArray[i]}" class="results-img">`};
-    imageHtml = generateForm()
-    console.log(imageHtml);
+  const imagesArray = responseJson.message;
+  const generateForm = function(i){return`<img src="${imagesArray[i]}" class="results-img">`;};
+  for (let i=0; i<inputNum; i++) {
+    htmlString = generateForm(i).push();
+    var images = htmlString.join('');
   }
-  $('.results-img').html(imageHtml)
+
+  $('.results-img').html(images); 
   //display the results section
   $('.results').removeClass('hidden');
 }
